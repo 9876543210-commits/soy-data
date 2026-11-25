@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>巴西大豆 · 播种与物候进度</title>
+<style>
+  :root{
+    --bg:#f4f5f6;
+    --card:#ffffff;
+    --line:#e2e4e7;
+    --line-soft:#eceef0;
+    --line-strong:#1c1d1f;
+    --head:#f0f1f3;
+    --head-soft:#f8f9fa;
+    --ink:#111214;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);}
+  body{
+    font-family:"Inter","Helvetica Neue","PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    font-size:13px;
+    line-height:1.6;
+  }
+  .page{max-width:1400px;margin:0 auto;padding:40px 32px 56px;}
+  /* ---------- 页头 ---------- */
+  .head{padding-bottom:22px;border-bottom:1px solid var(--line);}
+  .head h1{
+    margin:0;
+    font-size:26px;font-weight:700;letter-spacing:.5px;line-height:1.3;
+  }
+  .head .meta{
+    margin-top:8px;
+    font-size:12px;letter-spacing:.4px;
+  }
+  .head .meta span{white-space:nowrap;}
+  .head .meta .dot{display:inline-block;margin:0 10px;}
+  /* ---------- 区块 ---------- */
+  .block{margin-top:38px;}
+  .block-head{
+    display:flex;align-items:baseline;justify-content:space-between;
+    gap:16px;margin-bottom:12px;
+  }
+  .block-head h2{
+    margin:0;font-size:17px;font-weight:700;letter-spacing:.6px;
+  }
+  .block-head .note{font-size:11.5px;line-height:1.5;text-align:right;}
+  /* ---------- 表格 ---------- */
+  .tbl-wrap{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow-x:auto;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-variant-numeric:tabular-nums;
+  }
+  thead th{
+    background:var(--head);
+    font-weight:600;
+    font-size:11.5px;
+    letter-spacing:.4px;
+    padding:7px 10px;
+    border-bottom:1px solid var(--line);
+    white-space:nowrap;
+    text-align:center;
+    vertical-align:middle;
+  }
+  thead tr.grp th{
+    background:var(--head-soft);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1.2px;
+    padding:8px 10px;
+    border-bottom:1px solid var(--line);
+    text-align:center;
+  }
+  thead th.lead{text-align:left;}
+  thead th.grp-start{border-left:2px solid var(--line-strong);}
+  thead tr.grp th.grp-start{border-left:2px solid var(--line-strong);}
+  tbody td{
+    padding:8px 10px;
+    border-bottom:1px solid var(--line-soft);
+    text-align:right;
+    vertical-align:middle;
+    font-size:12.5px;
+    white-space:nowrap;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:nth-child(even) td{background:#fbfbfc;}
+  tbody tr:hover td{background:#f2f3f5;}
+  td.lead{
+    text-align:left;
+    font-weight:700;
+    letter-spacing:.6px;
+    font-size:12.5px;
+  }
+  td.state{font-size:12px;font-weight:600;text-align:center;letter-spacing:.5px;}
+  td.grp-start{border-left:2px solid var(--line-strong);}
+  /* 数值强调 */
+  .em{font-weight:700;font-size:13.5px;}
+  .dim{font-size:11.5px;font-weight:400;}
+  /* ---------- 综合判断单元格 ---------- */
+  td.judge{
+    text-align:left;
+    white-space:normal;
+    min-width:280px;
+    padding-left:12px;
+  }
+  .jd{font-size:12.5px;line-height:1.5;}
+  .jd b{font-size:13.5px;font-weight:700;letter-spacing:.3px;}
+  .jd .vs{margin-left:8px;font-size:11.5px;}
+  .jd-m{margin-top:3px;font-size:11px;line-height:1.55;letter-spacing:.2px;}
+  .jd-f{margin-top:3px;font-size:11px;line-height:1.5;font-weight:700;}
+  /* ---------- 脚注 ---------- */
+  .mark{font-size:9px;font-weight:600;vertical-align:super;margin-left:1px;}
+  .foot{margin-top:14px;font-size:11px;line-height:1.7;}
+  @media (max-width:900px){
+    .page{padding:28px 16px 40px;}
+    .head h1{font-size:21px;}
+    .block-head{flex-direction:column;align-items:flex-start;gap:4px;}
+    .block-head .note{text-align:left;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="head">
+    <h1>巴西大豆 · 播种与物候进度</h1>
+    <div class="meta">
+      <span>数据截止 2026-11-25</span><span class="dot">｜</span>
+      <span>单位：播种进度（%）、物候进度（占已播面积 %）</span><span class="dot">｜</span>
+      <span>口径：CONAB 周度</span>
+    </div>
+  </header>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>播种进度</h2>
+      <div class="note">12 州 ｜ A、B 均以 11/23 CONAB 为基线 ｜ 误差 = 预测 − 官方值（百分点）｜ 12 州等权平均绝对误差 4.66 个百分点</div>
+    </div>
+    <div class="tbl-wrap">
+      <table id="t-sowing">
+        <thead>
+          <tr class="grp">
+            <th class="lead" rowspan="2" style="width:58px;text-align:center;">州</th>
+            <th colspan="5" class="grp-start">预测 · 11/30 CONAB</th>
+            <th colspan="3" class="grp-start">回看 · 11/23 CONAB</th>
+          </tr>
+          <tr>
+            <th class="grp-start" style="width:82px;">A · 无遥感</th>
+            <th style="width:82px;">B · 遥感融合 <span class="mark">1</span></th>
+            <th style="width:66px;">B − A</th>
+            <th style="width:96px;">历史同期中位数 / 差值</th>
+            <th style="width:300px;">综合判断</th>
+            <th class="grp-start" style="width:94px;">上周预测 · 无遥感</th>
+            <th style="width:82px;">11/23 实际</th>
+            <th style="width:66px;">误差</th>
+          </tr>
+        </thead>
+        <tbody id="tb-sowing"></tbody>
+      </table>
+    </div>
+    <div class="foot">¹ 截止时点暂无符合时效条件的有效遥感观测，后续有待补充。</div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>物候进度</h2>
+      <div class="note">6 阶段 ｜ 误差 = 预测 − 官方值（百分点）｜ 数值为各阶段占已播面积的比例</div>
+    </div>
+    <div class="tbl-wrap">
+      <table id="t-pheno">
+        <thead>
+          <tr class="grp">
+            <th class="lead" rowspan="2" style="width:120px;text-align:center;">物候阶段</th>
+            <th colspan="3" class="grp-start">预测 · 11/30 CONAB</th>
+            <th colspan="3" class="grp-start">回看 · 11/23 CONAB</th>
+          </tr>
+          <tr>
+            <th class="grp-start" style="width:96px;">A · 无遥感</th>
+            <th style="width:96px;">B · 遥感融合</th>
+            <th style="width:72px;">B − A</th>
+            <th class="grp-start" style="width:110px;">上周预测 · 无遥感</th>
+            <th style="width:96px;">11/23 实际</th>
+            <th style="width:76px;">误差</th>
+          </tr>
+        </thead>
+        <tbody id="tb-pheno"></tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* =====================================================================
+   数据层：全部数值集中在此，修改后页面即按最新数据重绘。
+   若在 DATA_URL 填入在线 JSON 地址（结构同下），页面会自动拉取并按
+   60s 周期比对哈希，数据变动即刷新展示，无需任何操作。
+   ===================================================================== */
+const DATA_URL = "https://raw.githubusercontent.com/9876543210-commits/soy-data/refs/heads/main/%E5%A4%A7%E8%B1%86%E8%BF%9B%E5%BA%A6%E6%95%B0%E6%8D%AE.json";
+const DATA_POLL_MS = 60000;
+
+const DEFAULTS = {
+  meta: { asof: "2026-11-25", conabReview: "11/23", conabForecast: "11/30" },
+  sowing: [
+    { st:"BA", a:"83.57", b:"85.98", d:"+2.42", med:"74.43", medD:"+11.55", judge:"播种偏快", vs:"+10.43",
+      rain:"+18.2", hot:"0", ndvi:"0.232", ndmi:"−0.158", flag:"",
+      last:"84.11", act:"75.00", err:"+9.11" },
+    { st:"GO", a:"97.31", b:"97.79", d:"+0.48", med:"83.71", medD:"+13.82", judge:"播种偏快", vs:"+13.07",
+      rain:"−21.5", hot:"0", ndvi:"0.561", ndmi:"+0.058", flag:"",
+      last:"91.04", act:"92.00", err:"−0.96" },
+    { st:"MA", a:"42.16", b:"", d:"", med:"42.86", medD:"−0.70", judge:"播种接近常态", vs:"−1.94",
+      rain:"−33.9", hot:"6", ndvi:"0.275", ndmi:"−0.159",
+      flag:"遥感水分指数与气象水分收支同向偏紧，建议关注",
+      last:"38.73", act:"35.00", err:"+3.73" },
+    { st:"MG", a:"97.16", b:"", d:"", med:"83.43", medD:"+13.73", judge:"播种偏快", vs:"+12.53",
+      rain:"+52.4", hot:"0", ndvi:"0.404", ndmi:"−0.020", flag:"",
+      last:"92.06", act:"90.10", err:"+1.96" },
+    { st:"MS", a:"99.00", b:"99.10", d:"+0.11", med:"95.43", medD:"+3.67", judge:"播种偏快", vs:"+3.47",
+      rain:"−21.0", hot:"0", ndvi:"0.500", ndmi:"+0.017", flag:"",
+      last:"98.20", act:"97.00", err:"+1.20" },
+    { st:"MT", a:"100.00", b:"100.00", d:"0.00", med:"99.48", medD:"+0.52", judge:"播种接近常态", vs:"+0.52",
+      rain:"−0.5", hot:"2", ndvi:"0.615", ndmi:"+0.134", flag:"",
+      last:"100.00", act:"100.00", err:"0.00" },
+    { st:"PI", a:"65.14", b:"", d:"", med:"55.14", medD:"+10.00", judge:"播种偏快", vs:"+10.01",
+      rain:"−20.7", hot:"3", ndvi:"0.230", ndmi:"−0.240",
+      flag:"遥感水分指数与气象水分收支同向偏紧，建议关注",
+      last:"34.93", act:"47.00", err:"−12.07" },
+    { st:"PR", a:"94.94", b:"95.26", d:"+0.32", med:"94.14", medD:"+1.12", judge:"播种接近常态", vs:"+1.07",
+      rain:"+52.3", hot:"0", ndvi:"0.322", ndmi:"−0.065", flag:"",
+      last:"87.42", act:"89.00", err:"−1.58" },
+    { st:"RS", a:"77.39", b:"80.40", d:"+3.01", med:"54.71", medD:"+25.69", judge:"播种偏快", vs:"+24.92",
+      rain:"+65.2", hot:"0", ndvi:"0.342", ndmi:"−0.023", flag:"",
+      last:"53.27", act:"62.00", err:"−8.73" },
+    { st:"SC", a:"83.00", b:"", d:"", med:"69.14", medD:"+13.86", judge:"播种偏快", vs:"+12.95",
+      rain:"+93.3", hot:"0", ndvi:"", ndmi:"", flag:"",
+      last:"68.16", act:"73.29", err:"−5.13" },
+    { st:"SP", a:"98.34", b:"98.74", d:"+0.40", med:"98.57", medD:"−0.17", judge:"播种接近常态", vs:"−0.31",
+      rain:"−20.2", hot:"4", ndvi:"0.349", ndmi:"−0.050",
+      flag:"遥感水分指数与气象水分收支同向偏紧，建议关注",
+      last:"98.21", act:"97.00", err:"+1.21" },
+    { st:"TO", a:"75.08", b:"", d:"", med:"76.71", medD:"−1.63", judge:"播种偏慢", vs:"−3.96",
+      rain:"+69.3", hot:"0", ndvi:"0.204", ndmi:"−0.152", flag:"",
+      last:"74.20", act:"64.00", err:"+10.20" }
+  ],
+  pheno: [
+    { stage:"出苗",     a:"8.22",  b:"5.50",  d:"−2.73", last:"11.96", act:"11.82", err:"+0.14" },
+    { stage:"营养生长", a:"72.48", b:"74.08", d:"+1.60", last:"78.56", act:"75.90", err:"+2.65" },
+    { stage:"开花",     a:"11.95", b:"11.79", d:"−0.16", last:"7.12",  act:"9.74",  err:"−2.62" },
+    { stage:"籽粒灌浆", a:"7.35",  b:"8.63",  d:"+1.28", last:"2.36",  act:"2.54",  err:"−0.18" },
+    { stage:"成熟",     a:"0.00",  b:"0.00",  d:"0.00",  last:"0.00",  act:"0.00",  err:"0.00" },
+    { stage:"收获",     a:"0.00",  b:"0.00",  d:"0.00",  last:"0.00",  act:"0.00",  err:"0.00" }
+  ]
+};
+
+let DATA = DEFAULTS;
+let DATA_HASH = "";
+let lastPayloadHash = "";
+
+/* ---------- 小工具 ---------- */
+const esc = s => String(s == null ? "" : s)
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const absNum = s => { const n = parseFloat(String(s).replace(/[^0-9.\-−]/g,"").replace("−","-")); return isNaN(n) ? 0 : Math.abs(n); };
+const pct = v => v === "" || v == null ? "—" : v + "%";
+
+function numCell(v, cls, unitCol) {
+  if (v === "" || v == null) return `<td class="${cls}">—</td>`;
+  return `<td class="${cls}">${v}${unitCol ? "%" : ""}</td>`;
+}
+function signedCell(v, strongAt) {
+  if (v === "" || v == null) return `<td>—</td>`;
+  const strong = strongAt && absNum(v) >= strongAt ? " em" : "";
+  return `<td class="num${strong}">${v}</td>`;
+}
+
+/* ---------- 播种表 ---------- */
+function renderSowing(rows) {
+  const tb = document.getElementById("tb-sowing");
+  tb.innerHTML = rows.map(r => {
+    const medStrong = absNum(r.medD) >= 10 ? "em" : "";
+    const errStrong = absNum(r.err) >= 5 ? "em" : "";
+    const metrics = [
+      `降雨−ET₀ ${r.rain}mm`,
+      `≥35°C ${r.hot}天`,
+      r.ndvi ? `NDVI ${r.ndvi}` : null,
+      r.ndmi ? `NDMI ${r.ndmi}` : null
+    ].filter(Boolean).join(" ｜ ");
+    const flag = r.flag ? `<div class="jd-f">${esc(r.flag)}</div>` : "";
+    return `<tr>
+      <td class="state lead">${esc(r.st)}</td>
+      ${numCell(r.a, "grp-start", true)}
+      ${numCell(r.b, "", true)}
+      ${numCell(r.d, "", false)}
+      <td>${r.med}%<div class="dim">/ ${r.medD}pp</div></td>
+      <td class="judge">
+        <div class="jd"><b>${esc(r.judge)}</b><span class="vs">较近五季同期 ${r.vs}pp</span></div>
+        <div class="jd-m">${esc(metrics)}</div>
+        ${flag}
+      </td>
+      <td class="grp-start">${r.last}%</td>
+      <td>${r.act}%</td>
+      <td class="num${errStrong}">${r.err}</td>
+    </tr>`;
+  }).join("");
+}
+
+/* ---------- 物候表 ---------- */
+function renderPheno(rows) {
+  const tb = document.getElementById("tb-pheno");
+  tb.innerHTML = rows.map(r => `<tr>
+      <td class="lead">${esc(r.stage)}</td>
+      ${numCell(r.a, "grp-start", true)}
+      ${numCell(r.b, "", true)}
+      ${numCell(r.d, "", false)}
+      <td class="grp-start">${r.last}%</td>
+      <td>${r.act}%</td>
+      <td class="num${absNum(r.err) >= 2 ? " em" : ""}">${r.err}</td>
+    </tr>`).join("");
+}
+
+function renderAll() {
+  renderSowing(DATA.sowing || DEFAULTS.sowing);
+  renderPheno(DATA.pheno || DEFAULTS.pheno);
+}
+
+/* ---------- 在线数据同步 ---------- */
+function payloadHash(o) {
+  return JSON.stringify(o).split("").reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7) + "";
+}
+async function pullRemote() {
+  if (!DATA_URL) return;
+  try {
+    const res = await fetch(DATA_URL + (DATA_URL.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) return;
+    const json = await res.json();
+    const h = payloadHash(json);
+    if (h === lastPayloadHash) return;
+    lastPayloadHash = h;
+    DATA = Object.assign({}, DEFAULTS, json);
+    renderAll();
+  } catch (e) { /* 数据源不可达时保持当前渲染结果 */ }
+}
+
+renderAll();
+pullRemote();
+if (DATA_URL) setInterval(pullRemote, DATA_POLL_MS);
+
+/* 供数据写回后即时重绘使用 */
+window.soyPage = { setData(json) { DATA = Object.assign({}, DEFAULTS, json); lastPayloadHash = payloadHash(json); renderAll(); }, refresh: pullRemote };
+</script>
+</body>
+</html>
+<!-- （注：内容由AI生成） -->
