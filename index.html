@@ -6,123 +6,125 @@
 <title>巴西大豆 · 播种与物候进度</title>
 <style>
   :root{
-    --bg:#f4f5f6;
-    --card:#ffffff;
-    --line:#e2e4e7;
-    --line-soft:#eceef0;
-    --line-strong:#1c1d1f;
-    --head:#f0f1f3;
-    --head-soft:#f8f9fa;
-    --ink:#111214;
+    --bg:#f4f5f6; --card:#fff; --line:#e2e4e7; --line-soft:#eceef0;
+    --line-strong:#1c1d1f; --head:#f0f1f3; --head-soft:#f8f9fa; --ink:#111214;
+    --bar-strong:#111214; --bar-mid:#7f8fa6; --bar-soft:#c6ced6;
+    --early:#4c7d63; --early-ink:#2f6b4f; --late:#a8595a; --late-ink:#954a48; --neutral:#6a7178;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);}
   body{
     font-family:"Inter","Helvetica Neue","PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
-    -webkit-font-smoothing:antialiased;
-    font-size:13px;
-    line-height:1.6;
+    -webkit-font-smoothing:antialiased;font-size:13px;line-height:1.6;
   }
   .page{max-width:1400px;margin:0 auto;padding:40px 32px 56px;}
-  /* ---------- 页头 ---------- */
-  .head{padding-bottom:22px;border-bottom:1px solid var(--line);}
-  .head h1{
-    margin:0;
-    font-size:26px;font-weight:700;letter-spacing:.5px;line-height:1.3;
-  }
-  .head .meta{
-    margin-top:8px;
-    font-size:12px;letter-spacing:.4px;
-  }
-  .head .meta span{white-space:nowrap;}
+
+  .head{padding-bottom:20px;border-bottom:1px solid var(--line);}
+  .head h1{margin:0;font-size:26px;font-weight:700;letter-spacing:.5px;line-height:1.3;}
+  .head .meta{margin-top:8px;font-size:12px;letter-spacing:.4px;}
   .head .meta .dot{display:inline-block;margin:0 10px;}
-  /* ---------- 区块 ---------- */
-  .block{margin-top:38px;}
-  .block-head{
-    display:flex;align-items:baseline;justify-content:space-between;
-    gap:16px;margin-bottom:12px;
-  }
-  .block-head h2{
-    margin:0;font-size:17px;font-weight:700;letter-spacing:.6px;
-  }
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px;}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px 18px 15px;}
+  .kpi .kl{font-size:11.5px;letter-spacing:1px;}
+  .kpi .kv{margin-top:6px;font-size:30px;line-height:1.2;font-weight:700;letter-spacing:-.5px;}
+  .kpi .kv.early{color:var(--early-ink);}
+  .kpi .kv small{font-size:12.5px;font-weight:600;margin-left:4px;letter-spacing:0;}
+  .kpi .kn{margin-top:8px;font-size:11px;line-height:1.5;}
+
+  .block{margin-top:36px;}
+  .block-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:12px;}
+  .block-head h2{margin:0;font-size:17px;font-weight:700;letter-spacing:.6px;}
   .block-head .note{font-size:11.5px;line-height:1.5;text-align:right;}
-  /* ---------- 表格 ---------- */
-  .tbl-wrap{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:4px;
-    overflow-x:auto;
-  }
-  table{
-    width:100%;
-    border-collapse:collapse;
-    font-variant-numeric:tabular-nums;
-  }
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:20px 22px 16px;}
+
+  /* 图例 */
+  .lg-legend{display:flex;flex-wrap:wrap;gap:22px;margin-bottom:18px;font-size:11.5px;}
+  .lg{display:flex;align-items:center;gap:7px;}
+  .lg i{display:inline-block;border-radius:1px;}
+
+  /* 播种进度对比 */
+  .pg{--nm:52px;--v:76px;--t:60px;}
+  .pg-head,.pg-row{display:grid;grid-template-columns:var(--nm) 1fr var(--v) var(--v) var(--t);align-items:center;gap:16px;}
+  .pg-head{font-size:11px;letter-spacing:.6px;padding-bottom:7px;border-bottom:1px solid var(--line);}
+  .pg-head span:nth-child(n+3){text-align:right;}
+  .pg-row{padding:10px 0;border-bottom:1px solid var(--line-soft);}
+  .pg-row:last-child{border-bottom:none;}
+  .pg-row .nm{font-size:12px;font-weight:700;letter-spacing:.6px;}
+  .pg-row .v{text-align:right;font-size:12px;font-variant-numeric:tabular-nums;}
+  .pg-row .tag{text-align:right;font-size:11.5px;letter-spacing:.3px;white-space:nowrap;}
+  .pg-row .tag i{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;vertical-align:1px;}
+  .pg-row .tag.early{color:var(--early-ink);font-weight:700;}
+  .pg-row .tag.early i{background:var(--early);}
+  .pg-row .tag.late{color:var(--late-ink);font-weight:700;}
+  .pg-row .tag.late i{background:var(--late);}
+  .pg-row .tag.neutral{color:var(--neutral);}
+  .pg-row .tag.neutral i{background:var(--neutral);}
+  .tr{position:relative;height:42px;}
+  .tr:before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--line);}
+  .bar{position:absolute;left:0;border-radius:1px;}
+  .bar.act{top:2px;height:8px;background:var(--bar-soft);}
+  .bar.fc{top:15px;height:12px;background:var(--bar-strong);}
+  .bar.md{top:32px;height:5px;background:var(--bar-mid);}
+  .pg-foot{margin-top:12px;font-size:11px;line-height:1.6;}
+
+  /* 物候对比 */
+  .gb{--nm:104px;--v:84px;}
+  .gb-head,.gb-row{display:grid;grid-template-columns:var(--nm) 1fr var(--v) var(--v);align-items:center;gap:16px;}
+  .gb-head{font-size:11px;letter-spacing:.6px;padding-bottom:7px;border-bottom:1px solid var(--line);}
+  .gb-head span:nth-child(n+3){text-align:right;}
+  .gb-row{padding:9px 0;border-bottom:1px solid var(--line-soft);}
+  .gb-row:last-child{border-bottom:none;}
+  .gb-row .nm{font-size:12.5px;font-weight:700;letter-spacing:.4px;}
+  .gb-row .v{text-align:right;font-size:12.5px;font-variant-numeric:tabular-nums;}
+  .tr2{position:relative;height:26px;}
+  .tr2:before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--line);}
+  .b{position:absolute;left:0;height:9px;border-radius:1px;}
+  .b.official{top:2px;background:var(--bar-soft);}
+  .b.forecast{top:14px;background:var(--bar-strong);}
+  .gb-foot{margin-top:12px;font-size:11px;line-height:1.6;}
+
+  .tbl-wrap{background:var(--card);border:1px solid var(--line);border-radius:4px;overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;}
   thead th{
-    background:var(--head);
-    font-weight:600;
-    font-size:11.5px;
-    letter-spacing:.4px;
-    padding:7px 10px;
-    border-bottom:1px solid var(--line);
-    white-space:nowrap;
-    text-align:center;
-    vertical-align:middle;
+    background:var(--head);font-weight:600;font-size:11.5px;letter-spacing:.4px;
+    padding:7px 10px;border-bottom:1px solid var(--line);
+    white-space:nowrap;text-align:center;vertical-align:middle;
   }
   thead tr.grp th{
-    background:var(--head-soft);
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:1.2px;
-    padding:8px 10px;
-    border-bottom:1px solid var(--line);
-    text-align:center;
+    background:var(--head-soft);font-size:12px;font-weight:700;letter-spacing:1.2px;
+    padding:8px 10px;border-bottom:1px solid var(--line);text-align:center;
   }
-  thead th.lead{text-align:left;}
-  thead th.grp-start{border-left:2px solid var(--line-strong);}
-  thead tr.grp th.grp-start{border-left:2px solid var(--line-strong);}
+  thead th.grp-start,thead tr.grp th.grp-start{border-left:2px solid var(--line-strong);}
   tbody td{
-    padding:8px 10px;
-    border-bottom:1px solid var(--line-soft);
-    text-align:right;
-    vertical-align:middle;
-    font-size:12.5px;
-    white-space:nowrap;
+    padding:8px 10px;border-bottom:1px solid var(--line-soft);
+    text-align:right;vertical-align:middle;font-size:12.5px;white-space:nowrap;
   }
   tbody tr:last-child td{border-bottom:none;}
   tbody tr:nth-child(even) td{background:#fbfbfc;}
   tbody tr:hover td{background:#f2f3f5;}
-  td.lead{
-    text-align:left;
-    font-weight:700;
-    letter-spacing:.6px;
-    font-size:12.5px;
-  }
+  td.lead{text-align:left;font-weight:700;letter-spacing:.6px;font-size:12.5px;}
   td.state{font-size:12px;font-weight:600;text-align:center;letter-spacing:.5px;}
   td.grp-start{border-left:2px solid var(--line-strong);}
-  /* 数值强调 */
   .em{font-weight:700;font-size:13.5px;}
   .dim{font-size:11.5px;font-weight:400;}
-  /* ---------- 综合判断单元格 ---------- */
-  td.judge{
-    text-align:left;
-    white-space:normal;
-    min-width:280px;
-    padding-left:12px;
-  }
+  td.judge{text-align:left;white-space:normal;min-width:280px;padding-left:12px;}
   .jd{font-size:12.5px;line-height:1.5;}
   .jd b{font-size:13.5px;font-weight:700;letter-spacing:.3px;}
   .jd .vs{margin-left:8px;font-size:11.5px;}
   .jd-m{margin-top:3px;font-size:11px;line-height:1.55;letter-spacing:.2px;}
   .jd-f{margin-top:3px;font-size:11px;line-height:1.5;font-weight:700;}
-  /* ---------- 脚注 ---------- */
   .mark{font-size:9px;font-weight:600;vertical-align:super;margin-left:1px;}
   .foot{margin-top:14px;font-size:11px;line-height:1.7;}
+
+  @media (max-width:1100px){ .kpis{grid-template-columns:repeat(2,1fr);} }
   @media (max-width:900px){
     .page{padding:28px 16px 40px;}
     .head h1{font-size:21px;}
     .block-head{flex-direction:column;align-items:flex-start;gap:4px;}
     .block-head .note{text-align:left;}
+    .pg{--nm:44px;--v:62px;--t:50px;}
+    .gb{--nm:72px;--v:70px;}
   }
 </style>
 </head>
@@ -138,16 +140,26 @@
     </div>
   </header>
 
+  <div class="kpis" id="kpis"></div>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>播种早晚：12 州进度</h2>
+      <div class="note">条越长、越靠右，说明播种越早 ｜ 三条分别为 11/23 官方、11/30 预测 A、近五季同期中位数</div>
+    </div>
+    <div class="panel pg" id="progress"></div>
+  </section>
+
   <section class="block">
     <div class="block-head">
       <h2>播种进度</h2>
-      <div class="note">12 州 ｜ A、B 均以 11/23 CONAB 为基线 ｜ 误差 = 预测 − 官方值（百分点）｜ 12 州等权平均绝对误差 4.66 个百分点</div>
+      <div class="note">12 州 ｜ A、B 均以 11/23 CONAB 为基线 ｜ 12 州等权平均绝对误差 4.66 个百分点</div>
     </div>
     <div class="tbl-wrap">
-      <table id="t-sowing">
+      <table>
         <thead>
           <tr class="grp">
-            <th class="lead" rowspan="2" style="width:58px;text-align:center;">州</th>
+            <th rowspan="2" style="width:58px;">州</th>
             <th colspan="5" class="grp-start">预测 · 11/30 CONAB</th>
             <th colspan="3" class="grp-start">回看 · 11/23 CONAB</th>
           </tr>
@@ -171,13 +183,14 @@
   <section class="block">
     <div class="block-head">
       <h2>物候进度</h2>
-      <div class="note">6 阶段 ｜ 误差 = 预测 − 官方值（百分点）｜ 数值为各阶段占已播面积的比例</div>
+      <div class="note">占已播面积比例 ｜ 11/23 官方 与 11/30 遥感融合预测（B）对比</div>
     </div>
-    <div class="tbl-wrap">
-      <table id="t-pheno">
+    <div class="panel gb" id="pheno-stack"></div>
+    <div class="tbl-wrap" style="margin-top:14px;">
+      <table>
         <thead>
           <tr class="grp">
-            <th class="lead" rowspan="2" style="width:120px;text-align:center;">物候阶段</th>
+            <th rowspan="2" style="width:120px;">物候阶段</th>
             <th colspan="3" class="grp-start">预测 · 11/30 CONAB</th>
             <th colspan="3" class="grp-start">回看 · 11/23 CONAB</th>
           </tr>
@@ -199,9 +212,8 @@
 
 <script>
 /* =====================================================================
-   数据层：全部数值集中在此，修改后页面即按最新数据重绘。
-   若在 DATA_URL 填入在线 JSON 地址（结构同下），页面会自动拉取并按
-   60s 周期比对哈希，数据变动即刷新展示，无需任何操作。
+   数据层：数值集中在此，改动后页面按最新数据重绘。
+   DATA_URL 指向同目录数据文件，页面每 60s 比对哈希，变动即刷新。
    ===================================================================== */
 const DATA_URL = "大豆进度数据.json";
 const DATA_POLL_MS = 60000;
@@ -210,44 +222,32 @@ const DEFAULTS = {
   meta: { asof: "2026-11-25", conabReview: "11/23", conabForecast: "11/30" },
   sowing: [
     { st:"BA", a:"83.57", b:"85.98", d:"+2.42", med:"74.43", medD:"+11.55", judge:"播种偏快", vs:"+10.43",
-      rain:"+18.2", hot:"0", ndvi:"0.232", ndmi:"−0.158", flag:"",
-      last:"84.11", act:"75.00", err:"+9.11" },
+      rain:"+18.2", hot:"0", ndvi:"0.232", ndmi:"−0.158", flag:"", last:"84.11", act:"75.00", err:"+9.11" },
     { st:"GO", a:"97.31", b:"97.79", d:"+0.48", med:"83.71", medD:"+13.82", judge:"播种偏快", vs:"+13.07",
-      rain:"−21.5", hot:"0", ndvi:"0.561", ndmi:"+0.058", flag:"",
-      last:"91.04", act:"92.00", err:"−0.96" },
+      rain:"−21.5", hot:"0", ndvi:"0.561", ndmi:"+0.058", flag:"", last:"91.04", act:"92.00", err:"−0.96" },
     { st:"MA", a:"42.16", b:"", d:"", med:"42.86", medD:"−0.70", judge:"播种接近常态", vs:"−1.94",
       rain:"−33.9", hot:"6", ndvi:"0.275", ndmi:"−0.159",
-      flag:"遥感水分指数与气象水分收支同向偏紧，建议关注",
-      last:"38.73", act:"35.00", err:"+3.73" },
+      flag:"遥感水分指数与气象水分收支同向偏紧，建议关注", last:"38.73", act:"35.00", err:"+3.73" },
     { st:"MG", a:"97.16", b:"", d:"", med:"83.43", medD:"+13.73", judge:"播种偏快", vs:"+12.53",
-      rain:"+52.4", hot:"0", ndvi:"0.404", ndmi:"−0.020", flag:"",
-      last:"92.06", act:"90.10", err:"+1.96" },
+      rain:"+52.4", hot:"0", ndvi:"0.404", ndmi:"−0.020", flag:"", last:"92.06", act:"90.10", err:"+1.96" },
     { st:"MS", a:"99.00", b:"99.10", d:"+0.11", med:"95.43", medD:"+3.67", judge:"播种偏快", vs:"+3.47",
-      rain:"−21.0", hot:"0", ndvi:"0.500", ndmi:"+0.017", flag:"",
-      last:"98.20", act:"97.00", err:"+1.20" },
+      rain:"−21.0", hot:"0", ndvi:"0.500", ndmi:"+0.017", flag:"", last:"98.20", act:"97.00", err:"+1.20" },
     { st:"MT", a:"100.00", b:"100.00", d:"0.00", med:"99.48", medD:"+0.52", judge:"播种接近常态", vs:"+0.52",
-      rain:"−0.5", hot:"2", ndvi:"0.615", ndmi:"+0.134", flag:"",
-      last:"100.00", act:"100.00", err:"0.00" },
+      rain:"−0.5", hot:"2", ndvi:"0.615", ndmi:"+0.134", flag:"", last:"100.00", act:"100.00", err:"0.00" },
     { st:"PI", a:"65.14", b:"", d:"", med:"55.14", medD:"+10.00", judge:"播种偏快", vs:"+10.01",
       rain:"−20.7", hot:"3", ndvi:"0.230", ndmi:"−0.240",
-      flag:"遥感水分指数与气象水分收支同向偏紧，建议关注",
-      last:"34.93", act:"47.00", err:"−12.07" },
+      flag:"遥感水分指数与气象水分收支同向偏紧，建议关注", last:"34.93", act:"47.00", err:"−12.07" },
     { st:"PR", a:"94.94", b:"95.26", d:"+0.32", med:"94.14", medD:"+1.12", judge:"播种接近常态", vs:"+1.07",
-      rain:"+52.3", hot:"0", ndvi:"0.322", ndmi:"−0.065", flag:"",
-      last:"87.42", act:"89.00", err:"−1.58" },
+      rain:"+52.3", hot:"0", ndvi:"0.322", ndmi:"−0.065", flag:"", last:"87.42", act:"89.00", err:"−1.58" },
     { st:"RS", a:"77.39", b:"80.40", d:"+3.01", med:"54.71", medD:"+25.69", judge:"播种偏快", vs:"+24.92",
-      rain:"+65.2", hot:"0", ndvi:"0.342", ndmi:"−0.023", flag:"",
-      last:"53.27", act:"62.00", err:"−8.73" },
+      rain:"+65.2", hot:"0", ndvi:"0.342", ndmi:"−0.023", flag:"", last:"53.27", act:"62.00", err:"−8.73" },
     { st:"SC", a:"83.00", b:"", d:"", med:"69.14", medD:"+13.86", judge:"播种偏快", vs:"+12.95",
-      rain:"+93.3", hot:"0", ndvi:"", ndmi:"", flag:"",
-      last:"68.16", act:"73.29", err:"−5.13" },
+      rain:"+93.3", hot:"0", ndvi:"", ndmi:"", flag:"", last:"68.16", act:"73.29", err:"−5.13" },
     { st:"SP", a:"98.34", b:"98.74", d:"+0.40", med:"98.57", medD:"−0.17", judge:"播种接近常态", vs:"−0.31",
       rain:"−20.2", hot:"4", ndvi:"0.349", ndmi:"−0.050",
-      flag:"遥感水分指数与气象水分收支同向偏紧，建议关注",
-      last:"98.21", act:"97.00", err:"+1.21" },
+      flag:"遥感水分指数与气象水分收支同向偏紧，建议关注", last:"98.21", act:"97.00", err:"+1.21" },
     { st:"TO", a:"75.08", b:"", d:"", med:"76.71", medD:"−1.63", judge:"播种偏慢", vs:"−3.96",
-      rain:"+69.3", hot:"0", ndvi:"0.204", ndmi:"−0.152", flag:"",
-      last:"74.20", act:"64.00", err:"+10.20" }
+      rain:"+69.3", hot:"0", ndvi:"0.204", ndmi:"−0.152", flag:"", last:"74.20", act:"64.00", err:"+10.20" }
   ],
   pheno: [
     { stage:"出苗",     a:"8.22",  b:"5.50",  d:"−2.73", last:"11.96", act:"11.82", err:"+0.14" },
@@ -260,36 +260,117 @@ const DEFAULTS = {
 };
 
 let DATA = DEFAULTS;
-let DATA_HASH = "";
 let lastPayloadHash = "";
 
-/* ---------- 小工具 ---------- */
 const esc = s => String(s == null ? "" : s)
   .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-const absNum = s => { const n = parseFloat(String(s).replace(/[^0-9.\-−]/g,"").replace("−","-")); return isNaN(n) ? 0 : Math.abs(n); };
-const pct = v => v === "" || v == null ? "—" : v + "%";
+const num = s => parseFloat(String(s == null ? "" : s).replace("−","-").replace(/[^0-9.\-]/g,"")) || 0;
+const abs = s => Math.abs(num(s));
+const fmt = v => (v >= 0 ? "+" : "−") + Math.abs(v).toFixed(2);
 
-function numCell(v, cls, unitCol) {
+/* ---------- KPI ---------- */
+function renderKpis(rows) {
+  const errs = rows.map(r => num(r.err));
+  const mae = errs.reduce((s, v) => s + Math.abs(v), 0) / errs.length;
+  const within2 = errs.filter(v => Math.abs(v) <= 2).length;
+  const early = rows.filter(r => r.judge.indexOf("偏快") > -1).length;
+  const onPar = rows.filter(r => r.judge.indexOf("接近常态") > -1).length;
+  const late = rows.length - early - onPar;
+  const mostEarly = rows.reduce((m, r) => (num(r.medD) > num(m.medD) ? r : m), rows[0]);
+
+  const items = [
+    { l:"提前量", v:"5", u:"天", n:"预测均早于 CONAB 官方发布 5 天（11/18 → 11/23、11/25 → 11/30）" },
+    { l:"播种偏早", early:true, v:`${early}`, u:`/ ${rows.length} 州`, c:"early", n:`${onPar} 州接近常态、${late} 州偏晚 ｜ 以近五季同期中位数为界` },
+    { l:"领先同期最多", v: mostEarly.st, u:`${mostEarly.a}%`, n:"同期中位数 " + mostEarly.med + "% ｜ 12 州中进度最靠前" },
+    { l:"平均绝对误差", v: mae.toFixed(2), u:"pp", n:`上期回看 12 州等权 ｜ ±2pp 以内 ${within2} 州` }
+  ];
+  document.getElementById("kpis").innerHTML = items.map(k => `
+    <div class="kpi">
+      <div class="kl">${k.l}</div>
+      <div class="kv${k.c ? " " + k.c : ""}">${k.v}<small>${k.u}</small></div>
+      <div class="kn">${k.n}</div>
+    </div>`).join("");
+}
+
+/* ---------- 播种早晚对比 ---------- */
+function renderProgress(rows) {
+  const sorted = rows.slice().sort((a, b) => num(b.medD) - num(a.medD));
+  const MAX = 100;
+
+  const body = sorted.map(r => {
+    const act = num(r.act), fc = num(r.a), md = num(r.med);
+    const isEarly = r.judge.indexOf("偏快") > -1;
+    const isLate = r.judge.indexOf("偏慢") > -1;
+    const cls = isEarly ? "tag early" : (isLate ? "tag late" : "tag neutral");
+    const tag = isEarly ? "偏早" : (isLate ? "偏晚" : "接近常态");
+    return `<div class="pg-row">
+      <span class="nm">${esc(r.st)}</span>
+      <div class="tr">
+        <div class="bar act" style="width:${Math.min(act / MAX * 100, 100)}%"></div>
+        <div class="bar fc" style="width:${Math.min(fc / MAX * 100, 100)}%"></div>
+        <div class="bar md" style="width:${Math.min(md / MAX * 100, 100)}%"></div>
+      </div>
+      <span class="v">${act.toFixed(2)}%</span>
+      <span class="v">${fc.toFixed(2)}%</span>
+      <span class="${cls}"><i></i>${tag}</span>
+    </div>`;
+  }).join("");
+
+  document.getElementById("progress").innerHTML = `
+    <div class="lg-legend">
+      <div class="lg"><i style="background:var(--bar-soft);width:26px;height:6px"></i>11/23 官方</div>
+      <div class="lg"><i style="background:var(--bar-strong);width:26px;height:9px"></i>11/30 预测 A</div>
+      <div class="lg"><i style="background:var(--bar-mid);width:26px;height:3px"></i>近五季同期中位数</div>
+    </div>
+    <div class="pg-head">
+      <span>州</span><span>播种进度 0–100%</span><span>11/23</span><span>11/30 预测</span><span style="text-align:right">早晚</span>
+    </div>
+    ${body}
+    <div class="pg-foot">按 11/30 预测相对同期中位数由早到晚排列 ｜ 条越靠右表示进度越靠前、播种越早</div>`;
+}
+
+/* ---------- 物候对比 ---------- */
+function renderStack(rows) {
+  const stages = rows.filter(r => num(r.act) > 0);
+  const MAX = 80;
+
+  const body = stages.map(r => {
+    const o = num(r.act), f = num(r.b);
+    return `<div class="gb-row">
+      <span class="nm">${esc(r.stage)}</span>
+      <div class="tr2">
+        <div class="b official" style="width:${Math.min(o / MAX * 100, 100)}%"></div>
+        <div class="b forecast" style="width:${Math.min(f / MAX * 100, 100)}%"></div>
+      </div>
+      <span class="v">${o.toFixed(2)}%</span>
+      <span class="v">${f.toFixed(2)}%</span>
+    </div>`;
+  }).join("");
+
+  document.getElementById("pheno-stack").innerHTML = `
+    <div class="lg-legend">
+      <div class="lg"><i style="background:var(--bar-soft);width:26px;height:8px"></i>11/23 官方</div>
+      <div class="lg"><i style="background:var(--bar-strong);width:26px;height:8px"></i>11/30 预测 B（遥感融合）</div>
+    </div>
+    <div class="gb-head">
+      <span>物候阶段</span><span>占已播面积 0–80%</span><span>11/23</span><span>11/30 B</span>
+    </div>
+    ${body}
+    <div class="gb-foot">成熟、收获两阶段均为 0，未列出</div>`;
+}
+
+/* ---------- 表格 ---------- */
+function numCell(v, cls, unit) {
   if (v === "" || v == null) return `<td class="${cls}">—</td>`;
-  return `<td class="${cls}">${v}${unitCol ? "%" : ""}</td>`;
-}
-function signedCell(v, strongAt) {
-  if (v === "" || v == null) return `<td>—</td>`;
-  const strong = strongAt && absNum(v) >= strongAt ? " em" : "";
-  return `<td class="num${strong}">${v}</td>`;
+  return `<td class="${cls}">${v}${unit ? "%" : ""}</td>`;
 }
 
-/* ---------- 播种表 ---------- */
 function renderSowing(rows) {
-  const tb = document.getElementById("tb-sowing");
-  tb.innerHTML = rows.map(r => {
-    const medStrong = absNum(r.medD) >= 10 ? "em" : "";
-    const errStrong = absNum(r.err) >= 5 ? "em" : "";
+  document.getElementById("tb-sowing").innerHTML = rows.map(r => {
+    const errStrong = abs(r.err) >= 5 ? " em" : "";
     const metrics = [
-      `降雨−ET₀ ${r.rain}mm`,
-      `≥35°C ${r.hot}天`,
-      r.ndvi ? `NDVI ${r.ndvi}` : null,
-      r.ndmi ? `NDMI ${r.ndmi}` : null
+      `降雨−ET₀ ${r.rain}mm`, `≥35°C ${r.hot}天`,
+      r.ndvi ? `NDVI ${r.ndvi}` : null, r.ndmi ? `NDMI ${r.ndmi}` : null
     ].filter(Boolean).join(" ｜ ");
     const flag = r.flag ? `<div class="jd-f">${esc(r.flag)}</div>` : "";
     return `<tr>
@@ -310,29 +391,33 @@ function renderSowing(rows) {
   }).join("");
 }
 
-/* ---------- 物候表 ---------- */
 function renderPheno(rows) {
-  const tb = document.getElementById("tb-pheno");
-  tb.innerHTML = rows.map(r => `<tr>
+  document.getElementById("tb-pheno").innerHTML = rows.map(r => `<tr>
       <td class="lead">${esc(r.stage)}</td>
       ${numCell(r.a, "grp-start", true)}
       ${numCell(r.b, "", true)}
       ${numCell(r.d, "", false)}
       <td class="grp-start">${r.last}%</td>
       <td>${r.act}%</td>
-      <td class="num${absNum(r.err) >= 2 ? " em" : ""}">${r.err}</td>
+      <td class="num${abs(r.err) >= 2 ? " em" : ""}">${r.err}</td>
     </tr>`).join("");
 }
 
 function renderAll() {
-  renderSowing(DATA.sowing || DEFAULTS.sowing);
-  renderPheno(DATA.pheno || DEFAULTS.pheno);
+  const sow = DATA.sowing || DEFAULTS.sowing;
+  const phe = DATA.pheno || DEFAULTS.pheno;
+  renderKpis(sow);
+  renderProgress(sow);
+  renderSowing(sow);
+  renderPheno(phe);
+  renderStack(phe);
 }
 
-/* ---------- 在线数据同步 ---------- */
+/* ---------- 数据同步 ---------- */
 function payloadHash(o) {
   return JSON.stringify(o).split("").reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7) + "";
 }
+
 async function pullRemote() {
   if (!DATA_URL) return;
   try {
@@ -344,15 +429,16 @@ async function pullRemote() {
     lastPayloadHash = h;
     DATA = Object.assign({}, DEFAULTS, json);
     renderAll();
-  } catch (e) { /* 数据源不可达时保持当前渲染结果 */ }
+  } catch (e) { /* 数据源不可达时保持当前渲染 */ }
 }
 
 renderAll();
 pullRemote();
 if (DATA_URL) setInterval(pullRemote, DATA_POLL_MS);
-
-/* 供数据写回后即时重绘使用 */
-window.soyPage = { setData(json) { DATA = Object.assign({}, DEFAULTS, json); lastPayloadHash = payloadHash(json); renderAll(); }, refresh: pullRemote };
+window.soyPage = {
+  setData(json) { DATA = Object.assign({}, DEFAULTS, json); lastPayloadHash = payloadHash(json); renderAll(); },
+  refresh: pullRemote
+};
 </script>
 </body>
 </html>
